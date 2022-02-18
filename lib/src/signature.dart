@@ -29,7 +29,11 @@ class ECDSASignature extends Equatable {
   BigInt s;
   int v;
 
-  ECDSASignature(this.r, this.s, this.v) : super([r, s, v]);
+  ECDSASignature(this.r, this.s, this.v) : super();
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => throw UnimplementedError();
 }
 
 Uint8List sha3(Uint8List input) {
@@ -48,7 +52,7 @@ BigInt generateNewPrivateKey(Random random) {
 
   final key = generator.generateKeyPair();
   final privateKey = key.privateKey as ECPrivateKey;
-  return privateKey.d;
+  return privateKey.d!;
 }
 
 /// Generates a public key for the given private key using the ecdsa curve which
@@ -58,7 +62,7 @@ Uint8List privateKeyToPublicKey(Uint8List privateKey) {
   final p = params.G * privateKeyNum;
 
   //skip the type flag, https://github.com/ethereumjs/ethereumjs-util/blob/master/index.js#L319
-  return Uint8List.view(p.getEncoded(false).buffer, 1);
+  return Uint8List.view(p!.getEncoded(false).buffer, 1);
 }
 
 /// Constructs the Ethereum address associated with the given public key by
@@ -178,7 +182,7 @@ Uint8List? _recoverPublicKeyFromSignature(
   if (x.compareTo(prime) >= 0) return null;
 
   final R = _decompressKey(x, (recId & 1) == 1, params.curve);
-  if (!(R * n).isInfinity) return null;
+  if (!(R * n)!.isInfinity) return null;
 
   final e = decodeBigInt(message);
 
@@ -187,9 +191,9 @@ Uint8List? _recoverPublicKeyFromSignature(
   final srInv = (rInv * s) % n;
   final eInvrInv = (rInv * eInv) % n;
 
-  final q = (params.G * eInvrInv) + (R * srInv);
+  final q = (params.G * eInvrInv)! + (R * srInv);
 
-  final bytes = q.getEncoded(false);
+  final bytes = q!.getEncoded(false);
   return bytes.sublist(1);
 }
 
@@ -224,7 +228,7 @@ ECPoint _decompressKey(BigInt xBN, bool yBit, ECCurve c) {
 
   final compEnc = x9IntegerToBytes(xBN, 1 + ((c.fieldSize + 7) ~/ 8));
   compEnc[0] = yBit ? 0x03 : 0x02;
-  return c.decodePoint(compEnc);
+  return c.decodePoint(compEnc)!;
 }
 
 ///
