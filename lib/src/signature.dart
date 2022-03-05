@@ -61,7 +61,7 @@ Uint8List privateKeyToPublicKey(Uint8List privateKey) {
   final p = params.G * privateKeyNum;
 
   //skip the type flag, https://github.com/ethereumjs/ethereumjs-util/blob/master/index.js#L319
-  return Uint8List.view(p.getEncoded(false).buffer, 1);
+  return Uint8List.view(p!.getEncoded(false).buffer, 1);
 }
 
 /// Constructs the Ethereum address associated with the given public key by
@@ -192,7 +192,7 @@ Uint8List? _recoverPublicKeyFromSignature(
 
   final q = (params.G * eInvrInv)! + (R * srInv);
 
-  final bytes = q.getEncoded(false);
+  final bytes = q!.getEncoded(false);
   return bytes.sublist(1);
 }
 
