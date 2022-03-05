@@ -29,10 +29,7 @@ class ECDSASignature extends Equatable {
   BigInt s;
   int v;
 
-  ECDSASignature(this.r, this.s, this.v) : super();
-
-  @override
-  List<Object?> get props => [this.r, this.s, this.v];
+  ECDSASignature(this.r, this.s, this.v) : super([r, s, v]);
 }
 
 Uint8List sha3(Uint8List input) {
