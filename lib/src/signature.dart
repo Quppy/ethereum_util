@@ -32,8 +32,7 @@ class ECDSASignature extends Equatable {
   ECDSASignature(this.r, this.s, this.v) : super();
 
   @override
-  // TODO: implement props
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [this.r, this.s, this.v];
 }
 
 Uint8List sha3(Uint8List input) {

@@ -1,6 +1,6 @@
 name: ethereum_util
 description: a collection of utility functions for Ethereum
-version: 3.0.0
+version: 3.0.1
 homepage: https://github.com/ethereumdart/ethereum_util
 
 environment:
@@ -13,11 +13,11 @@ dependencies:
   buffer: ^1.1.1
   equatable: ^2.0.3
   collection: ^1.15.0
-  json_annotation: 
+  json_annotation:
   quiver: ^3.0.1+1
 
 dev_dependencies:
-  build_runner: 
-  json_serializable: 
-  path: 
-  test: 
+  build_runner:
+  json_serializable:
+  path:
+  test:
